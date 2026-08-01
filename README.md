@@ -45,7 +45,7 @@ OIDC_ENABLED              = true
 OIDC_ISSUER               = http://localhost:9000
 OIDC_JWKS_URI             = http://localhost:9000/.well-known/jwks.json
 OIDC_ENTITLEMENTS_CLAIM   = entitlements          # match the login page field
-OIDC_REQUIRED_ENTITLEMENT = UPAX-APPROVED
+OIDC_REQUIRED_ENTITLEMENT = APPLICATION-APPROVED
 # OIDC_AUDIENCE (if you enforce aud) = sim-client  (must equal client_id)
 ```
 
@@ -64,14 +64,14 @@ backend's normal `kid` → JWKS → verify path works unchanged.
 
 ### One-click preset users
 The login page has quick-login buttons that fill the claims and sign in immediately:
-- **Approved analyst** — `roles: analyst,power-user`, `entitlements: UPAX-APPROVED`
+- **Approved analyst** — `roles: analyst,power-user`, `entitlements: APPLICATION-APPROVED`
 - **Unentitled** — `roles: analyst`, `entitlements:` *(empty)* → exercises the 403 gate
-- **Admin** — `roles: admin,analyst,power-user`, `entitlements: UPAX-APPROVED`
+- **Admin** — `roles: admin,analyst,power-user`, `entitlements: APPLICATION-APPROVED`
 
 Edit the `PRESETS` list near the bottom of `app.py` to change them.
 
 ### Or test manually
-- **Entitled (happy path):** leave `entitlements = UPAX-APPROVED` → your app grants access.
+- **Entitled (happy path):** leave `entitlements = APPLICATION-APPROVED` → your app grants access.
 - **Unentitled (403 path):** click **"Clear entitlements"** (or empty the field) → your
   app's entitlement gate should block the data.
 - **Roles / other claims:** edit `roles` or any field to exercise role checks.

@@ -42,7 +42,7 @@ DEFAULTS = {
     "name": "Test User",
     "email": "test.user@agency.gov",
     "roles": "analyst,power-user",
-    "entitlements": "UPAX-APPROVED",
+    "entitlements": "APPLICATION-APPROVED",
     "entitlements_claim": "entitlements",  # claim NAME (can be a namespaced URI)
 }
 
@@ -257,11 +257,11 @@ def _mint_token(claims: dict, audience: str, nonce, is_id: bool) -> str:
 # -------------------------------------------------------------- login page -----
 # Preset personas shown as one-click buttons: (label, roles, entitlements, sub, name, email)
 PRESETS = [
-    ("Approved analyst", "analyst,power-user", "UPAX-APPROVED",
+    ("Approved analyst", "analyst,power-user", "APPLICATION-APPROVED",
      "sim-analyst", "Approved Analyst", "analyst@agency.gov"),
     ("Unentitled", "analyst", "",
      "sim-unentitled", "Unentitled User", "nobody@agency.gov"),
-    ("Admin", "admin,analyst,power-user", "UPAX-APPROVED",
+    ("Admin", "admin,analyst,power-user", "APPLICATION-APPROVED",
      "sim-admin", "Admin User", "admin@agency.gov"),
 ]
 
