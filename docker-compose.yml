@@ -1,0 +1,17 @@
+# Standalone: run just the OIDC simulator.
+#   docker compose up --build
+# Then it's reachable at http://localhost:9000 (browser AND host).
+#
+# To run it ALONGSIDE your app's stack, copy the `oidc-sim` service into your
+# app's docker-compose.dev.yml on the SAME network. See README.md for the
+# issuer/JWKS wiring (the browser and the backend reach it by different names).
+services:
+  oidc-sim:
+    build: .
+    container_name: oidc_sim
+    ports:
+      - "9000:9000"
+    environment:
+      # The URL the BROWSER uses — must match what the frontend validates as `iss`.
+      - SIM_ISSUER=http://localhost:9000
+      - SIM_PORT=9000
