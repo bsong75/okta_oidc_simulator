@@ -5,6 +5,12 @@ Code + PKCE)** to test a real client app's login flow locally — **without** a 
 Okta tenant. You control the claims (`sub`, `email`, `roles`, `entitlements`, …) from
 a small login page, so you can test entitled vs. unentitled users, different roles, etc.
 
+<p align="center">
+  <img src="screenshot.png" alt="The simulator's login page: the incoming client_id, redirect_uri and PKCE method at the top, three quick sign-in preset buttons, then editable fields for sub, name, email, roles, entitlements and the entitlements claim name." width="440">
+</p>
+
+<p align="center"><em>This page replaces Okta's PIV/certificate prompt — you type the claims your app will receive.</em></p>
+
 > ⚠️ **Test double — localhost/dev only.** It trusts any `client_id`/`redirect_uri`
 > and mints tokens with whatever claims you type. Never expose it publicly.
 
@@ -61,6 +67,12 @@ backend's normal `kid` → JWKS → verify path works unchanged.
 3. Edit the claims, click **Sign in** → it redirects back to your app with a code.
 4. Your app exchanges the code at `/token` (PKCE verified) → gets `id_token` +
    `access_token` containing those claims.
+
+Step 2 is the whole point — it's where a real Okta would do PIV/certificate auth, and
+instead you just type the claims ([screenshot above](#oidc--okta-simulator-local-testing)).
+The grey box at the top of that page echoes back the `client_id`, `redirect_uri` and PKCE
+method your app actually sent, which is the fastest way to confirm the client is
+configured the way you think it is.
 
 ### One-click preset users
 The login page has quick-login buttons that fill the claims and sign in immediately:
